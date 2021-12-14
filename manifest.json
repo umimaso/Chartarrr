@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "TBD: Testing Tool",
+	"name": "Chartarrr!",
 	"description": "Assisting in exploratory testing on the web.",
 	"version": "0.0.1",
 	"icons": {
@@ -22,6 +22,6 @@
 		//	"64": "icons/tbd-64.png"
 		//}
 		"default_popup": "popup/testing.html",
-		"default_title": "TBD: Testing Tool"
+		"default_title": "Chartarrr!"
 	}
 }

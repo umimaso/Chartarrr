@@ -21,7 +21,7 @@
 		//	"32": "icons/tbd-32.png",
 		//	"64": "icons/tbd-64.png"
 		//}
-		"default_popup": "popup/landing.html",
+		"default_popup": "popup.html",
 		"default_title": "Chartarrr!"
 	}
 }

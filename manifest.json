@@ -4,7 +4,8 @@
 	"description": "Assisting in exploratory testing on the web.",
 	"version": "0.0.1",
 	"icons": {
-		"64": "icons/icon.png"
+		"48": "icons/icon.png",
+		"96": "icons/icon@2x.png"
 	},
 
 	"permissions": [
@@ -19,13 +20,11 @@
 	},
 
 	"browser_action": {
-		"default_icon": "icons/icon.png",
-		// TODO: Icons
-		//"default_icon": {
-		//	"16": "icons/tbd-16.png",
-		//	"32": "icons/tbd-32.png",
-		//	"64": "icons/tbd-64.png"
-		//}
+		"default_icon": {
+			"16": "icons/icon-16.png",
+			"32": "icons/icon-32.png",
+			"64": "icons/icon-64.png"
+		},
 		"default_popup": "popup.html",
 		"default_title": "Chartarrr!"
 	}

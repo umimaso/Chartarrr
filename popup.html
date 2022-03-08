@@ -3,12 +3,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../css/pure-min.css">
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="css/pure-min.css">
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 
 	<body>
 		<h1>Chartarrr!</h1>
-		<button class="button-small pure-button pure-button-primary">Start New Session</button>
+		<div id="start">
+			<form class="pure-form pure-form-stacked">
+				<label for="duration">Length (minutes):</label>
+				<input type="number" class="pure-input-1" id="duration" min="1" required="" />
+				<button type="submit" class="pure-button pure-button-primary" id="button-new-session">New Session</button>
+			</form>
+		</div>
+		<div id="active">
+			<p>Session is active</p>
+		</div>
+		<script src="js/popup.js"></script>
 	</body>
 </html>

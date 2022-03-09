@@ -13,10 +13,12 @@ function isActive() {
 function displayPopup() {
 	isActive().then(function (value) {
 		if (value) {
-			// Hide start session container
+			// Show active view
 			document.querySelector('#start').style.display = 'none';
+			document.querySelector('#active').style.display = 'initial';
 		} else {
-			// Hide active session container
+			// Show start view
+			document.querySelector('#start').style.display = 'initial';
 			document.querySelector('#active').style.display = 'none';
 		}
 	});
@@ -25,7 +27,7 @@ function displayPopup() {
 function startSession() {
 	// Get duration value from form
 	let estDuration = Number(document.getElementById('duration').value);
-	
+
 	// Check if an invalid number was given
 	// Exit early, the HTML form validation will highlight the field red
 	if (isNaN(estDuration) || estDuration < 1) {
@@ -58,5 +60,5 @@ function pauseSession() {
 	browser.browserAction.setBadgeBackgroundColor({color: 'orange'});
 }
 
-document.querySelector('#button-new-session').addEventListener('click', startSession);
+document.querySelector('#button-start').addEventListener('click', startSession);
 displayPopup()

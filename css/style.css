@@ -6,6 +6,49 @@ h1 {
 	font-size: 24px;
 }
 
+.attachment-message {
+	display: none;
+	background-color: lightblue;
+	border-radius: 4px;
+	padding: 10px;
+	margin-bottom: 5px;
+}
+
+#attachment-delete {
+	float: right;
+	cursor: pointer;
+}
+
+.comment-box {
+	position: relative;
+}
+
+.comment-box button {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#comment {
+	resize: none;
+}
+
+.pure-button {
+	border-radius: 4px;
+}
+
 .button-small {
-	font-size: 85%;
+	font-size: 75%;
+}
+
+#button-note {
+	background: lightslategrey;
+}
+
+#button-bug {
+	background: lightcoral;
+}
+
+#button-clarification {
+	background: lightsalmon;
 }

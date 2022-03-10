@@ -1,44 +1,48 @@
 body {
 	margin: 10px;
+	width: 300px;
+	font-size: 16px;
 }
 
 h1 {
 	font-size: 24px;
 }
 
-.attachment-message {
-	display: none;
-	background-color: lightblue;
+button {
 	border-radius: 4px;
-	padding: 10px;
-	margin-bottom: 5px;
 }
 
-#attachment-delete {
-	float: right;
-	cursor: pointer;
+hr {
+	margin: 0;
+}
+
+.container {
+	margin: 0.5rem 0;
 }
 
 .comment-box {
 	position: relative;
 }
 
-.comment-box button {
+.comment-box textarea {
+	box-sizing: border-box;
+	overflow-x: hidden;
+	resize: none;
+	width: 260px;
+}
+
+.comment-box #attachment-action {
 	position: absolute;
 	top: 0;
 	right: 0;
+	width: 35px;
 }
 
-#comment {
-	resize: none;
-}
-
-.pure-button {
-	border-radius: 4px;
-}
-
-.button-small {
-	font-size: 75%;
+.comment-box #attachment-active {
+	display: none;
+	position: absolute;
+	top: 45px;
+	right: 10px;
 }
 
 #button-note {

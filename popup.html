@@ -3,7 +3,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/pure-min.css">
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/yorha.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/fontawesome.min.css">
 		<link rel="stylesheet" href="css/solid.min.css">
@@ -12,42 +13,41 @@
 	<body>
 		<h1>Chartarrr!</h1>
 		<div id="start">
-			<div class="pure-form pure-form-stacked">
+			<div class="container">
 				<label for="duration">Length (minutes):</label>
-				<input type="number" class="pure-input-1" id="duration" min="1" required="" />
-				<button class="pure-button pure-button-primary" id="button-start">New Session</button>
+				<input type="number" id="duration" min="1" required="" />
 			</div>
+			<button id="button-start">New Session</button>
 		</div>
 		<div id="active">
-			<div class="pure-form pure-form-stacked">
-				<div class="comment-box">
-					<textarea class="pure-input-1" id="comment" placeholder="New comment..."></textarea>
-					<button class="pure-button button-small" title="Take screenshot of active tab.">
+			<div>
+				<div class="container comment-box">
+					<textarea id="comment" rows="3" placeholder="New comment..."></textarea>
+					<button id="attachment-action" title="Take screenshot of active tab.">
 						<i class="fa-solid fa-camera"></i>
 					</button>
+					<span id="attachment-active" title="Image attached to note.">
+						<i class="fa-solid fa-paperclip"></i>
+					</span>
 				</div>
-				<div class="attachment-message">
-					<span id="attachment-delete" title="Delete attached image."><i class="fa-solid fa-trash"></i></span>
-					<span>Image of active tab attached</span>
-				</div>
-				<div role="group" aria-label="Comment type">
-					<button class="pure-button" id="button-note">
+				<div class="container" role="group" aria-label="Comment type">
+					<button id="button-note">
 						<i class="fa-solid fa-comment"></i> Note
 					</button>
-					<button class="pure-button" id="button-bug">
+					<button id="button-bug">
 						<i class="fa-solid fa-bug"></i> Bug
 					</button>
-					<button class="pure-button" id="button-clarification">
+					<button id="button-clarification">
 						<i class="fa-solid fa-question"></i> Clarification
 					</button>
 				</div>
 			</div>
 			<hr>
-			<div role="group" aria-label="Session actions">
-				<button class="pure-button" id="button-end">View Details</button>
-				<button class="pure-button" id="button-end">End Session</button>
+			<div class="container" role="group" aria-label="Session actions">
+				<button id="button-details">View Details</button>
+				<button id="button-end">End Session</button>
 				<!--
-				<button class="pure-button" id="button-end" aria-label="Settings">
+				<button id="button-settings" aria-label="Settings">
 					<i class="fa-solid fa-gear"></i>
 				</button>
 				-->

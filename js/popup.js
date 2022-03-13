@@ -18,6 +18,9 @@ function displayPopup() {
 			// Show start view
 			document.getElementById('start').style.display = 'initial';
 			document.getElementById('active').style.display = 'none';
+
+			// Auto focus duration input
+			document.getElementById('duration').focus();
 		}
 	});
 }

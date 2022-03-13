@@ -20,6 +20,18 @@ hr {
 	margin: 0.5rem 0;
 }
 
+.message {
+	display: none;
+	position: fixed;
+	top: 45%;
+	left: 50%;
+	text-transform: capitalize;
+	transform: translate(-50%, -50%);
+	background-color: lightseagreen;
+	color: white;
+	width: 65%;
+}
+
 .comment-box {
 	position: relative;
 }
@@ -38,11 +50,12 @@ hr {
 	width: 35px;
 }
 
-.comment-box #attachment-active {
-	display: none;
+.comment-count {
 	position: absolute;
-	top: 45px;
-	right: 10px;
+	top: 38px;
+	right: 2px;
+	width: 35px;
+	height: 35px;
 }
 
 #button-note {

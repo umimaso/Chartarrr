@@ -7,7 +7,7 @@ function checkAlarm(alarm) {
 					let current = results.active_session.duration + 1;
 					let remaining = estimated - current;
 
-					// Update the running duration to local storage for the active session
+					// Update the running duration for the active session
 					results.active_session.duration = current;
 					browser.storage.local.set(results);
 

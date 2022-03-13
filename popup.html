@@ -26,18 +26,21 @@
 					<button id="attachment-action" title="Take screenshot of active tab.">
 						<i class="fa-solid fa-camera"></i>
 					</button>
-					<span id="attachment-active" title="Image attached to note.">
-						<i class="fa-solid fa-paperclip"></i>
-					</span>
+					<div class="comment-count">
+						<span class="fa-stack" title="Total comment count.">
+							<i class="fa-solid fa-note-sticky fa-stack-2x"></i>
+							<span class="fa-stack-1x" id="comment-count-text">0</span>
+						</span>
+					</div>
 				</div>
 				<div class="container" role="group" aria-label="Comment type">
-					<button id="button-note">
+					<button id="button-note" value="note">
 						<i class="fa-solid fa-comment"></i> Note
 					</button>
-					<button id="button-bug">
+					<button id="button-bug" value="bug">
 						<i class="fa-solid fa-bug"></i> Bug
 					</button>
-					<button id="button-clarification">
+					<button id="button-clarification" value="clarification">
 						<i class="fa-solid fa-question"></i> Clarification
 					</button>
 				</div>
@@ -53,6 +56,13 @@
 				-->
 			</div>
 		</div>
+
+		<!-- Fixed elements -->
+		<div class="message" id="message">
+			<span id="message-text">Placeholder text to be replaced by JS.</span>
+		</div>
+
+		<!-- Scripts -->
 		<script src="js/browser-polyfill.min.js"></script>
 		<script src="js/popup.js"></script>
 	</body>

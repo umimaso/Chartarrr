@@ -34,8 +34,12 @@ function updateBadge(session) {
 	}
 }
 
-async function trackSession(session) {
+function trackSession(session) {
 	// Create an alarm which handles tracking our session duration every minute
 	browser.alarms.create('session', {periodInMinutes: 1});
 	updateBadge(session);
+}
+
+function deleteComment(index) {
+
 }

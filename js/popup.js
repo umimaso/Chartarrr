@@ -103,6 +103,12 @@ async function addComment(event) {
 	const type = event.target.value;
 	const comment = commentElement.value;
 
+	// Check if comment is empty
+	if (comment == '') {
+		displayMessage('No comment provided. Try again.', 1500)
+		return;
+	}
+
 	// Disable the button while comment is added
 	event.target.disabled = true;
 

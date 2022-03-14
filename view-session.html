@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Minimal classless stylesheet -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/yorha.min.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="css/fontawesome.min.css">
+		<link rel="stylesheet" href="css/solid.min.css">
+
+		<!-- Ours -->
+		<link rel="stylesheet" href="css/view-session.css">
+	</head>
+
+	<body>
+		<h1>Session Details</h1>
+
+		<h2>General</h2>
+		<div class="container">
+			<p>Estimated Chartar duration: <span id="estimated-duration">??</span> minutes</p>
+			<p>Current Chartar duration: <span id="duration">??</span> minutes</p>
+		</div>
+
+		<h2>Comments</h2>
+		<div class="container" id="comments">
+			<!-- JS creates these elements -->
+		</div>
+
+		<!-- Scripts -->
+		<script src="js/browser-polyfill.min.js"></script>
+		<script src="js/view-session.js"></script>
+	</body>
+</html>

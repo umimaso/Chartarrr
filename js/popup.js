@@ -197,6 +197,12 @@ async function deleteAttachment() {
 	updateAttachmentMessage();
 }
 
+function viewSession() {
+	browser.tabs.create({
+		url: "/view-session.html"
+	});
+}
+
 document.getElementById('button-start').addEventListener('click', startSession);
 document.getElementById('button-note').addEventListener('click', addComment);
 document.getElementById('button-bug').addEventListener('click', addComment);
@@ -204,4 +210,5 @@ document.getElementById('button-clarification').addEventListener('click', addCom
 document.getElementById('button-screenshot').addEventListener('click', takeScreenshot);
 document.getElementById('attachment-preview').addEventListener('click', previewAttachment);
 document.getElementById('attachment-delete').addEventListener('click', deleteAttachment);
+document.getElementById('button-details').addEventListener('click', viewSession);
 displayPopup()

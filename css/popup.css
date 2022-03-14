@@ -21,7 +21,6 @@ hr {
 	position: fixed;
 	top: 45%;
 	left: 50%;
-	text-transform: capitalize;
 	transform: translate(-50%, -50%);
 	background-color: lightseagreen;
 	color: white;

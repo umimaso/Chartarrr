@@ -49,6 +49,7 @@ function displayMessage(message, durationInMs) {
 	const messageElement = document.getElementById('message');
 	const messageElementText = document.getElementById('message-text');
 
+	message = message[0].toUpperCase() + message.substr(1);
 	messageElementText.textContent = message;
 	messageElement.style.display = 'block';
 	setTimeout(() => {

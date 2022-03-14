@@ -15,10 +15,15 @@ async function displaySession() {
 		let tabTitle = document.createElement('p');
 		let tabUrl = document.createElement('p');
 		let dateCreated = document.createElement('p');
-		let previewAttachment = document.createElement('button');
+		let actions = document.createElement('div');
+		let actionsDeleteComment = document.createElement('button');
+		let actionsPreviewAttachment = document.createElement('button');
 
 		// Set attributes for elements
 		div.setAttribute('class', 'container');
+		actions.setAttribute('role', 'group');
+		actions.setAttribute('aria-label', 'Comment actions');
+		actionsDeleteComment.style.background = 'lightcoral';
 
 		// Set values for elements
 		const type = comment.type[0].toUpperCase() + comment.type.substr(1);
@@ -28,25 +33,35 @@ async function displaySession() {
 		tabTitle.innerText = `Title: ${comment.tab.title}`;
 		tabUrl.innerText = `Url: ${comment.tab.url}`;
 		dateCreated.innerText = `Date: ${comment.date_created.toLocaleString()}`;
-		previewAttachment.innerText = 'Preview Attachment';
+		actionsDeleteComment.innerText = 'Delete Comment';
+		actionsPreviewAttachment.innerText = 'Preview Attachment';
+
+		// Event listeners
+		actionsDeleteComment.addEventListener('click', () => {
+			// Delete comment, and reload page to update list
+			deleteComment(index);
+			browser.tabs.reload();
+		})
+		actionsPreviewAttachment.addEventListener('click', () => {
+			browser.tabs.create({
+				url: `/preview-attachment.html?comment=${index + 1}`
+			});
+		});
 
 		// Append elements
 		tab.appendChild(legendTab);
 		tab.appendChild(tabTitle);
 		tab.appendChild(tabUrl);
+		actions.appendChild(actionsDeleteComment);
+		if (comment.attachment) {
+			actions.appendChild(actionsPreviewAttachment);
+		}
 		fieldset.appendChild(legendComment);
 		fieldset.appendChild(commentText);
 		fieldset.appendChild(tab);
 		fieldset.appendChild(document.createElement('br'));
 		fieldset.appendChild(dateCreated);
-		if (comment.attachment) {
-			previewAttachment.addEventListener('click', () => {
-				browser.tabs.create({
-					url: `/preview-attachment.html?comment=${index + 1}`
-				});
-			});
-			fieldset.appendChild(previewAttachment);
-		}
+		fieldset.appendChild(actions);
 		div.appendChild(fieldset);
 		document.getElementById('comments').appendChild(div);
 	});

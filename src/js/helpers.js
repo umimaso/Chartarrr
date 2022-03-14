@@ -41,5 +41,8 @@ function trackSession(session) {
 }
 
 function deleteComment(index) {
-
+	getActiveSession().then((session) => {
+		session.comments.splice(index, 1);
+		browser.storage.local.set({ active_session: session });
+	});
 }

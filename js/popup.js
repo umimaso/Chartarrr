@@ -5,6 +5,23 @@ function getActiveSession() {
 	});
 }
 
+function getLastScreenshot() {
+	// Return the last screenshot from local storage
+	return browser.storage.local.get('last_screenshot').then((results) => {
+		return results.last_screenshot;
+	});
+}
+
+function updateAttachmentMessage() {
+	getLastScreenshot().then((lastScreenshot) => {
+		if (lastScreenshot) {
+			document.getElementById('attachment-box').style.display = 'block';
+		} else {
+			document.getElementById('attachment-box').style.display = 'none';
+		}
+	});
+}
+
 function displayPopup() {
 	getActiveSession().then((session) => {
 		if (session) {
@@ -13,7 +30,10 @@ function displayPopup() {
 			document.getElementById('active').style.display = 'initial';
 
 			// Set comment count
-			document.getElementById('comment-count-text').textContent = session.comments.length;
+			document.getElementById('comment-count').textContent = session.comments.length;
+
+			// Display attachment actions if image is present
+			updateAttachmentMessage();
 		} else {
 			// Show start view
 			document.getElementById('start').style.display = 'initial';
@@ -23,6 +43,17 @@ function displayPopup() {
 			document.getElementById('duration').focus();
 		}
 	});
+}
+
+function displayMessage(message, durationInMs) {
+	const messageElement = document.getElementById('message');
+	const messageElementText = document.getElementById('message-text');
+
+	messageElementText.textContent = message;
+	messageElement.style.display = 'block';
+	setTimeout(() => {
+		messageElement.style.display = 'none';
+	}, durationInMs);
 }
 
 function startSession() {
@@ -46,7 +77,8 @@ function startSession() {
 			estimated_duration: estDuration,
 			duration: 0,
 			paused: false
-		}
+		},
+		last_screenshot: null
 	}
 	browser.storage.local.set(item);
 
@@ -65,9 +97,7 @@ function pauseSession() {
 
 async function addComment(event) {
 	const commentElement = document.getElementById('comment');
-	const messageElement = document.getElementById('message');
-	const messageElementText = document.getElementById('message-text');
-	const commentCountTextElement = document.getElementById('comment-count-text');
+	const commentCountElement = document.getElementById('comment-count');
 
 	const type = event.target.value;
 	const comment = commentElement.value;
@@ -82,6 +112,10 @@ async function addComment(event) {
 			return tabs[0];
 		});
 
+		// Get last screenshot imageUri and clear the value back to null
+		const lastScreenshot = await getLastScreenshot();
+		browser.storage.local.set({ last_screenshot: null });
+
 		session.comments.push({
 			type: type,
 			comment: comment,
@@ -89,7 +123,8 @@ async function addComment(event) {
 			tab: {
 				title: activeTab.title,
 				url: activeTab.url
-			}
+			},
+			attachment: lastScreenshot
 		});
 
 		// Update with comment added
@@ -97,26 +132,69 @@ async function addComment(event) {
 		browser.storage.local.set(item);
 
 		// Set comment count text to amount of comments
-		commentCountTextElement.textContent = session.comments.length;
+		commentCountElement.textContent = session.comments.length;
 	});
 
-	// Display a modal temporialy to notify user of comment being added
-	messageElementText.textContent = `${type} added.`
-	messageElement.style.display = 'block';
+	// Update attachment actions display
+	updateAttachmentMessage();
 
-	// Hide modal, and enable the button again after a second
-	setTimeout(() => {
-		event.target.disabled = false;
-		messageElement.style.display = 'none';
-	}, 1000);
+	// Enable the button now the comment has been made
+	event.target.disabled = false;
+
+	// Display a modal temporarily to notify user of comment being added
+	const message = `${type} added.`;
+	displayMessage(message, 1000);
 
 	// Empty the comment box text, and auto focus for next use
 	commentElement.value = '';
 	commentElement.focus();
 }
 
+// Store screenshot in storage for next saved comment to use
+// Replaces previous stored image
+async function takeScreenshot() {
+	const imageUri = await browser.tabs.captureVisibleTab().then((imageUri) => {
+		return imageUri;
+	});
+
+	await getLastScreenshot().then(async (lastScreenshot) => {
+		// Display a modal temporarily to notify user
+		if (lastScreenshot == null) {
+			displayMessage('Screenshot of tab attached.', 1500);
+		} else {
+			displayMessage('Previous image overriden.', 1500);
+		}
+
+		// Update last screenshot to image uri taken
+		lastScreenshot = imageUri;
+		const item = { last_screenshot: lastScreenshot };
+		browser.storage.local.set(item);
+	});
+
+	// Update attachment actions display
+	updateAttachmentMessage();
+}
+
+async function previewAttachment() {
+	await browser.tabs.create({
+		url: "/preview-attachment.html"
+	});
+}
+
+async function deleteAttachment() {
+	// Set last screenshot to null
+	const item = { last_screenshot: null };
+	await browser.storage.local.set(item);
+
+	// Update attachment actions display
+	updateAttachmentMessage();
+}
+
 document.querySelector('#button-start').addEventListener('click', startSession);
 document.querySelector('#button-note').addEventListener('click', addComment);
 document.querySelector('#button-bug').addEventListener('click', addComment);
 document.querySelector('#button-clarification').addEventListener('click', addComment);
+document.querySelector('#button-screenshot').addEventListener('click', takeScreenshot);
+document.querySelector('#attachment-preview').addEventListener('click', previewAttachment);
+document.querySelector('#attachment-delete').addEventListener('click', deleteAttachment);
 displayPopup()

@@ -3,15 +3,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+
+		<!-- Minimal classless stylesheet -->
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/yorha.min.css">
-		<link rel="stylesheet" href="css/style.css">
+
+		<!-- Font Awesome -->
 		<link rel="stylesheet" href="css/fontawesome.min.css">
 		<link rel="stylesheet" href="css/solid.min.css">
+
+		<!-- Ours -->
+		<link rel="stylesheet" href="css/popup.css">
 	</head>
 
 	<body>
 		<h1>Chartarrr!</h1>
+
 		<div id="start">
 			<div class="container">
 				<label for="duration">Length (minutes):</label>
@@ -19,19 +26,25 @@
 			</div>
 			<button id="button-start">New Session</button>
 		</div>
+
 		<div id="active">
 			<div>
 				<div class="container comment-box">
 					<textarea id="comment" rows="3" placeholder="New comment..."></textarea>
-					<button id="attachment-action" title="Take screenshot of active tab.">
+					<button id="button-screenshot" title="Take screenshot of active tab.">
 						<i class="fa-solid fa-camera"></i>
 					</button>
-					<div class="comment-count">
-						<span class="fa-stack" title="Total comment count.">
-							<i class="fa-solid fa-note-sticky fa-stack-2x"></i>
-							<span class="fa-stack-1x" id="comment-count-text">0</span>
-						</span>
-					</div>
+				</div>
+				<div class="container attachment-box" id="attachment-box" aria-label="Attached image actions">
+					<span id="attachment-preview">
+						<i class="fa-solid fa-paperclip"></i>
+						Image attached.
+					</span>
+					&emsp;&emsp;
+					<span id="attachment-delete">
+						<i class="fa-solid fa-trash"></i>
+						Delete
+					</span>
 				</div>
 				<div class="container" role="group" aria-label="Comment type">
 					<button id="button-note" value="note">
@@ -49,6 +62,10 @@
 			<div class="container" role="group" aria-label="Session actions">
 				<button id="button-details">View Details</button>
 				<button id="button-end">End Session</button>
+				<span class="fa-stack" title="Total comment count.">
+					<i class="fa-solid fa-note-sticky fa-stack-2x"></i>
+					<span class="fa-stack-1x" id="comment-count">0</span>
+				</span>
 				<!--
 				<button id="button-settings" aria-label="Settings">
 					<i class="fa-solid fa-gear"></i>

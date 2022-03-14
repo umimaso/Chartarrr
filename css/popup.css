@@ -8,10 +8,6 @@ h1 {
 	font-size: 24px;
 }
 
-button {
-	border-radius: 4px;
-}
-
 hr {
 	margin: 0;
 }
@@ -43,19 +39,20 @@ hr {
 	width: 260px;
 }
 
-.comment-box #attachment-action {
+.comment-box #button-screenshot {
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 35px;
 }
 
-.comment-count {
-	position: absolute;
-	top: 38px;
-	right: 2px;
-	width: 35px;
-	height: 35px;
+#attachment-preview {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#attachment-delete {
+	cursor: pointer;
 }
 
 #button-note {

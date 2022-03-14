@@ -182,8 +182,8 @@ async function takeScreenshot() {
 	updateAttachmentMessage();
 }
 
-async function previewAttachment() {
-	await browser.tabs.create({
+function previewAttachment() {
+	browser.tabs.create({
 		url: "/preview-attachment.html"
 	});
 }

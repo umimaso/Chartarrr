@@ -1,12 +1,4 @@
-function getActiveSession() {
-	// Return the active session from local storage
-	return browser.storage.local.get('active_session').then((results) => {
-		return results.active_session;
-	});
-}
-
 async function displaySession() {
-	const commentsElement = document.getElementById('comments');
 	const session = await getActiveSession();
 
 	document.getElementById('estimated-duration').textContent = session.estimated_duration;
@@ -56,7 +48,7 @@ async function displaySession() {
 			fieldset.appendChild(previewAttachment);
 		}
 		div.appendChild(fieldset);
-		commentsElement.appendChild(div);
+		document.getElementById('comments').appendChild(div);
 	});
 }
 

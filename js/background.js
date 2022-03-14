@@ -1,26 +1,11 @@
-function checkAlarm(alarm) {
+async function checkAlarm(alarm) {
 	switch (alarm.name) {
 		case 'session':
-			browser.storage.local.get('active_session')
-				.then(function (results) {
-					let estimated = results.active_session.estimated_duration;
-					let current = results.active_session.duration + 1;
-					let remaining = estimated - current;
-
-					// Update the running duration for the active session
-					results.active_session.duration = current;
-					browser.storage.local.set(results);
-
-					// Update badge text with remaining duration only if non negative value
-					if (remaining >= 0) {
-						browser.browserAction.setBadgeText({text: remaining.toString()});
-					}
-
-					// If this is the last minute, update the badge color
-					if (remaining == 0) {
-						browser.browserAction.setBadgeBackgroundColor({color: 'red'});
-					}
-				});
+			// Update the running duration for the active session
+			const session = await getActiveSession();
+			session.duration = session.duration + 1;
+			browser.storage.local.set({ active_session: session });
+			updateBadge(session);
 			break;
 	}
 }

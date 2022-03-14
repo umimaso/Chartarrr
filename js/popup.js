@@ -190,11 +190,11 @@ async function deleteAttachment() {
 	updateAttachmentMessage();
 }
 
-document.querySelector('#button-start').addEventListener('click', startSession);
-document.querySelector('#button-note').addEventListener('click', addComment);
-document.querySelector('#button-bug').addEventListener('click', addComment);
-document.querySelector('#button-clarification').addEventListener('click', addComment);
-document.querySelector('#button-screenshot').addEventListener('click', takeScreenshot);
-document.querySelector('#attachment-preview').addEventListener('click', previewAttachment);
-document.querySelector('#attachment-delete').addEventListener('click', deleteAttachment);
+document.getElementById('button-start').addEventListener('click', startSession);
+document.getElementById('button-note').addEventListener('click', addComment);
+document.getElementById('button-bug').addEventListener('click', addComment);
+document.getElementById('button-clarification').addEventListener('click', addComment);
+document.getElementById('button-screenshot').addEventListener('click', takeScreenshot);
+document.getElementById('attachment-preview').addEventListener('click', previewAttachment);
+document.getElementById('attachment-delete').addEventListener('click', deleteAttachment);
 displayPopup()

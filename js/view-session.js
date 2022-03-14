@@ -8,10 +8,11 @@ function getActiveSession() {
 async function displaySession() {
 	const commentsElement = document.getElementById('comments');
 	const session = await getActiveSession();
-	session.comments.forEach((comment, index) => {
-		document.getElementById('estimated-duration').textContent = session.estimated_duration;
-		document.getElementById('duration').textContent = session.duration;
 
+	document.getElementById('estimated-duration').textContent = session.estimated_duration;
+	document.getElementById('duration').textContent = session.duration;
+
+	session.comments.forEach((comment, index) => {
 		// Create elements
 		let div = document.createElement('div');
 		let fieldset = document.createElement('fieldset');

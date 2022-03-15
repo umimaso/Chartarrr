@@ -40,6 +40,13 @@ function trackSession(session) {
 	updateBadge(session);
 }
 
+function updateCommentText(index, text) {
+	getActiveSession().then((session) => {
+		session.comments[index].comment = text;
+		browser.storage.local.set({ active_session: session });
+	});
+}
+
 function deleteComment(index) {
 	getActiveSession().then((session) => {
 		session.comments.splice(index, 1);

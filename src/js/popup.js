@@ -34,7 +34,7 @@ function displayPopup() {
 function displayMessage(message, durationInMs) {
 	const messageElement = document.getElementById('message');
 
-	message = message[0].toUpperCase() + message.substr(1);
+	message = message[0].toUpperCase() + message.substring(1);
 	document.getElementById('message-text').textContent = message;
 	messageElement.style.display = 'block';
 	setTimeout(() => {

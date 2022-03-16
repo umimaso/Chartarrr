@@ -28,7 +28,7 @@ async function displaySession() {
 		actionsDeleteComment.style.background = 'lightcoral';
 
 		// Set values for elements
-		const type = comment.type[0].toUpperCase() + comment.type.substr(1);
+		const type = comment.type[0].toUpperCase() + comment.type.substring(1);
 		legendComment.innerText = `Comment ${index + 1} (${type})`;
 		commentText.value = comment.comment;
 		legendTab.innerText = 'Tab';

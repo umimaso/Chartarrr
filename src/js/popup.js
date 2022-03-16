@@ -54,9 +54,10 @@ function startSession() {
 	const item = {
 		active_session: {
 			comments: [],
-			estimated_duration: estDuration,
+			datetime_started: new Date(),
+			datetime_ended: null,
 			duration: 0,
-			paused: false
+			estimated_duration: estDuration
 		},
 		last_screenshot: null
 	}
@@ -163,6 +164,12 @@ function viewSession() {
 	});
 }
 
+function endSession() {
+	browser.tabs.create({
+		url: "/end-session.html"
+	});
+}
+
 document.getElementById('button-start').addEventListener('click', startSession);
 document.getElementById('button-note').addEventListener('click', addComment);
 document.getElementById('button-bug').addEventListener('click', addComment);
@@ -171,4 +178,5 @@ document.getElementById('button-screenshot').addEventListener('click', takeScree
 document.getElementById('attachment-preview').addEventListener('click', previewAttachment);
 document.getElementById('attachment-delete').addEventListener('click', deleteAttachment);
 document.getElementById('button-details').addEventListener('click', viewSession);
+document.getElementById('button-end').addEventListener('click', endSession);
 displayPopup()

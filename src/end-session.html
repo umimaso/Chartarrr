@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Minimal classless stylesheet -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/yorha.min.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="css/fontawesome.min.css">
+		<link rel="stylesheet" href="css/solid.min.css">
+
+		<!-- Ours -->
+		<link rel="stylesheet" href="css/session.css">
+	</head>
+
+	<body>
+		<h1>End Session</h1>
+
+		<h2>Charter Details</h2>
+		<div class="container">
+			<p>
+				<label for="charter">Charter Title:</label>
+				<input type="text" id="charter" placeholder="Explore..." />
+			</p>
+			<p>
+				<label for="environment">Environment:</label><br>
+				<textarea id="environment" rows="3">Web, QA, x.x.x</textarea>
+			</p>
+			<p>
+				<label for="estimated-duration">Estimated Duration:</label>
+				<input type="text" id="estimated-duration" />
+			</p>
+			<p>
+				<label for="actual-duration">Actual Duration:</label>
+				<input type="text" id="actual-duration" />
+			</p>
+			<p>
+				<label for="start-date">Started:</label>
+				<input type="datetime-local" id="start-date" />
+			</p>
+			<p>
+				<label for="end-date">Ended:</label>
+				<input type="datetime-local" id="end-date" />
+			</p>
+		</div>
+
+		<h2>Review Comments</h2>
+		<div class="container" id="comments">
+			<h3>Comment <span id="comment-current">?</span> of <span id="comment-total">?</span></h3>
+			<div class="container" id="comment"></div>
+			<div class="container" role="group" aria-label="Navigate notes">
+				<button id="button-previous">
+					<i class="fa-solid fa-angle-left"></i> Previous Note
+				</button>
+				<button id="button-next">
+					Next Note <i class="fa-solid fa-angle-right"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="container" id="no-comments">
+			<p>No comments made.</p>
+		</div>
+		
+		<h2>Actions</h2>
+		<div class="container" role="group" aria-label="Session actions">
+			<p>The following actions below can be used to export this session's details, and also for ending the active session.</p>
+			<button id="button-export-md">Export to Markdown</button>
+			<button id="button-export-json">Export to JSON</button>
+			<button id="button-end">End Session</button>
+		</div>
+
+		<!-- Scripts -->
+		<script src="js/browser-polyfill.min.js"></script>
+		<script src="js/helpers.js"></script>
+		<script src="js/end-session.js"></script>
+	</body>
+</html>

@@ -17,7 +17,7 @@ async function displayPreview() {
 	}
 
 	if (imageUri) {
-		document.getElementById('error').style.display = 'none';
+		document.getElementById('no-attachment').style.display = 'none';
 		document.getElementById('attachment').src = imageUri;
 	} else {
 		document.getElementById('image').style.display = 'none';

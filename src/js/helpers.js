@@ -25,6 +25,8 @@ function updateBadge(session) {
 	// Only update badge if non negative value
 	if (remaining >= 0) {
 		browser.browserAction.setBadgeText({text: remaining.toString()});
+	} else {
+		browser.browserAction.setBadgeText({text: '0'});
 	}
 
 	if (remaining <= 0) {

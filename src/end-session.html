@@ -65,18 +65,18 @@
 		</div>
 		
 		<h2>Actions</h2>
-		<div class="container" role="group" aria-label="Session actions">
-			<div class="container">
-				<p>The following actions below can be used to export this session's details, and also for ending the active session.</p>
-				<button id="button-export-md">Export to Markdown</button>
-				<button id="button-export-json">Export to JSON</button>
+		<div class="container">
+			<p>The following actions below can be used to export this session's details, and also for ending the active session.</p>
+			<div class="container" role="group" aria-label="Session actions">
+				<button id="button-export">Export Session</button>
+				<button id="button-preview-md">Preview Markdown</button>
+				<button id="button-preview-json">Preview JSON</button>
 				<button id="button-end">End Session</button>
+				<div id="preview">
+					<pre id="preview-content"></pre>
+				</div>
 			</div>
-			<div class="container" id="export">
-				<p>Export:</p>
-				<pre id="export-content">Test</pre>
-				<button id="button-export-download">Download with Images</button>
-			</div>
+			
 		</div>
 
 		<!-- Scripts -->

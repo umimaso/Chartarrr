@@ -7,10 +7,11 @@ function displayComment(comment) {
 }
 
 function displayEndSession() {
-	document.getElementById('export').style.display = 'none';
+	document.getElementById('preview').style.display = 'none';
 	getActiveSession().then((session) => {
 		loadDetails(session);
 
+		// Review comments
 		if (session.comments.length != 0) {
 			// Display the first comment in the session
 			document.getElementById('no-comments').style.display = 'none';
@@ -34,6 +35,23 @@ function displayEndSession() {
 			// Hide comments container due to the session not having any
 			document.getElementById('comments').style.display = 'none';
 		}
+
+		// Add event listener for download export
+		document.getElementById('button-export').addEventListener('click', () => {
+			downloadExport(session);
+		});
+
+		// Add event listeners for preview exports
+		document.getElementById('button-preview-md').addEventListener('click', () => {
+			session = addCharterDetailsToSession(session);
+			document.getElementById('preview').style.display = 'block';
+			document.getElementById('preview-content').textContent = getMarkdownExport(session);
+		});
+		document.getElementById('button-preview-json').addEventListener('click', () => {
+			session = addCharterDetailsToSession(session);
+			document.getElementById('preview').style.display = 'block';
+			document.getElementById('preview-content').textContent = JSON.stringify(session, null, 4);
+		});
 	});
 }
 
@@ -44,8 +62,27 @@ function loadDetails(session) {
 	document.getElementById('end-date').value = new Date().toISOString().substring(0, 16);
 }
 
-function endSession() {
-	//
+// Downloads the session screenshots, along with content in JSON, and Markdown
+function downloadExport(session) {
+	session = addCharterDetailsToSession(session);
+
+	// Create zip and add files
+	const zip = new JSZip();
+	zip.file('content.json', JSON.stringify(session));
+	zip.file('content.md', getMarkdownExport(session));
+	session.comments.forEach((comment, index) => {
+		if (comment.attachment) {
+			const imageBase64 = comment.attachment.replace(/^data:image\/[a-z]+;base64,/, '');
+			const imageFilename = `Comment ${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
+			zip.file(`screenshots/${imageFilename}`, imageBase64, {base64: true});
+		}
+	});
+
+	// Generate and save
+	zip.generateAsync({type: 'blob'}).then((blob) => {
+		const zipFilename = `Chater - ${session.datetime_started} - ${session.title}.zip`
+		saveAs(blob, zipFilename);
+	});
 }
 
 // Add the provided charter details onto the session before exporting it
@@ -69,31 +106,8 @@ function addCharterDetailsToSession(session) {
 	return session;
 }
 
-// Downloads the session screenshots, along with given content in the given format
-function downloadExport(session, content, format) {
-	// Create zip and add files
-	const zip = new JSZip();
-	zip.file(`content.${format}`, content);
-	session.comments.forEach((comment, index) => {
-		if (comment.attachment) {
-			const imageBase64 = comment.attachment.replace(/^data:image\/[a-z]+;base64,/, '');
-			const imageFilename = `Comment ${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
-			zip.file(`screenshots/${imageFilename}`, imageBase64, {base64: true});
-		}
-	});
-
-	// Generate and save
-	zip.generateAsync({type: 'blob'}).then((blob) => {
-		const zipFilename = `Chater - ${session.datetime_started} - ${session.title}.zip`
-		saveAs(blob, zipFilename);
-	});
-}
-
-function exportMarkdown() {
-	document.getElementById('export').style.display = 'initial';
-	getActiveSession().then((session) => {
-		session = addCharterDetailsToSession(session);
-		let text = `Title: ${session.title}
+function getMarkdownExport(session) {
+	let content = `Title: ${session.title}
 
 Description:
 **Pre-Testing Notes:**
@@ -111,49 +125,31 @@ ${session.environment}
 **Test Notes:**
 `;
 
-		session.comments.forEach((comment) => {
-			let textComment = '';
-			if (comment.type == 'bug') {
-				textComment += '*Bug*: ';
-			} else if (comment.type == 'clarification') {
-				textComment += '*Clarification*: ';
-			}
+	session.comments.forEach((comment) => {
+		let textComment = '';
+		if (comment.type == 'bug') {
+			textComment += '*Bug*: ';
+		} else if (comment.type == 'clarification') {
+			textComment += '*Clarification*: ';
+		}
 
-			textComment += `${comment.comment}
+		textComment += `${comment.comment}
 
 `;
-			text += textComment;
-		});
-
-		document.getElementById('export-content').textContent = text;
-
-		// Add event listener for download export
-		document.getElementById('button-export-download').addEventListener('click', () => {
-			downloadExport(session, text, 'md');
-		});
+		content += textComment;
 	});
-}
 
-// Displays the raw active session object for export, along with a download button
-function exportJson() {
-	document.getElementById('export').style.display = 'initial';
-	getActiveSession().then((session) => {
-		session = addCharterDetailsToSession(session);
-		document.getElementById('export-content').textContent = JSON.stringify(session, null, 4);
-
-		// Add event listener for download export
-		document.getElementById('button-export-download').addEventListener('click', () => {
-			downloadExport(session, JSON.stringify(session), 'json');
-		});
-	});
+	return content;
 }
 
 // Display a warning and another confirmation of ending the active session
 function warnEndSession() {
+	endSession()
+}
+
+function endSession() {
 	//
 }
 
-document.getElementById('button-export-md').addEventListener('click', exportMarkdown);
-document.getElementById('button-export-json').addEventListener('click', exportJson);
 document.getElementById('button-end').addEventListener('click', warnEndSession);
 displayEndSession()

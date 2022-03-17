@@ -24,3 +24,7 @@ button {
 .container {
 	margin: 2rem 0.5rem;
 }
+
+.warning {
+	color: red;
+}

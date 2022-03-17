@@ -8,6 +8,7 @@ function displayComment(comment) {
 
 function displayEndSession() {
 	document.getElementById('preview').style.display = 'none';
+	document.getElementById('warning-end-session').style.display = 'none';
 	getActiveSession().then((session) => {
 		loadDetails(session);
 
@@ -142,14 +143,23 @@ ${session.environment}
 	return content;
 }
 
-// Display a warning and another confirmation of ending the active session
-function warnEndSession() {
-	endSession()
+async function endSession() {
+	const warningText = document.getElementById('warning-end-session');
+	if (warningText.style.display === 'none') {
+		// Display a warning and another confirmation of ending the active session
+		warningText.style.display = 'block';
+		document.getElementById('button-end').textContent = 'Confirm End Session';
+	} else {
+		// End session logic
+		// Clear storage -> alarm -> badge text, and close this page
+		await browser.storage.local.remove('active_session');
+		await browser.alarms.clearAll();
+		browser.browserAction.setBadgeText({text: ''});
+		getActiveTab().then((tab) => {
+			browser.tabs.remove(tab.id);
+		});
+	}
 }
 
-function endSession() {
-	//
-}
-
-document.getElementById('button-end').addEventListener('click', warnEndSession);
+document.getElementById('button-end').addEventListener('click', endSession);
 displayEndSession()

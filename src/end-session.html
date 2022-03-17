@@ -19,6 +19,23 @@
 	<body>
 		<h1>End Session</h1>
 
+		<h2>Review Comments</h2>
+		<div class="container" id="comments">
+			<h3>Comment <span id="comment-current">?</span> of <span id="comment-total">?</span></h3>
+			<div class="container" id="comment"></div>
+			<div class="container" role="group" aria-label="Navigate notes">
+				<button id="button-previous">
+					<i class="fa-solid fa-angle-left"></i> Previous Note
+				</button>
+				<button id="button-next">
+					Next Note <i class="fa-solid fa-angle-right"></i>
+				</button>
+			</div>
+		</div>
+		<div class="container" id="no-comments">
+			<p>No comments made.</p>
+		</div>
+
 		<h2>Charter Details</h2>
 		<div class="container">
 			<p>
@@ -46,36 +63,27 @@
 				<input type="datetime-local" id="end-date" />
 			</p>
 		</div>
-
-		<h2>Review Comments</h2>
-		<div class="container" id="comments">
-			<h3>Comment <span id="comment-current">?</span> of <span id="comment-total">?</span></h3>
-			<div class="container" id="comment"></div>
-			<div class="container" role="group" aria-label="Navigate notes">
-				<button id="button-previous">
-					<i class="fa-solid fa-angle-left"></i> Previous Note
-				</button>
-				<button id="button-next">
-					Next Note <i class="fa-solid fa-angle-right"></i>
-				</button>
-			</div>
-		</div>
-
-		<div class="container" id="no-comments">
-			<p>No comments made.</p>
-		</div>
 		
 		<h2>Actions</h2>
 		<div class="container" role="group" aria-label="Session actions">
-			<p>The following actions below can be used to export this session's details, and also for ending the active session.</p>
-			<button id="button-export-md">Export to Markdown</button>
-			<button id="button-export-json">Export to JSON</button>
-			<button id="button-end">End Session</button>
+			<div class="container">
+				<p>The following actions below can be used to export this session's details, and also for ending the active session.</p>
+				<button id="button-export-md">Export to Markdown</button>
+				<button id="button-export-json">Export to JSON</button>
+				<button id="button-end">End Session</button>
+			</div>
+			<div class="container" id="export">
+				<p>Export:</p>
+				<pre id="export-content">Test</pre>
+				<button id="button-export-download">Download with Images</button>
+			</div>
 		</div>
 
 		<!-- Scripts -->
 		<script src="js/browser-polyfill.min.js"></script>
 		<script src="js/helpers.js"></script>
+		<script src="js/jszip.min.js"></script>
+		<script src="js/FileSaver.min.js"></script>
 		<script src="js/end-session.js"></script>
 	</body>
 </html>

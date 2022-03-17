@@ -7,6 +7,7 @@ function displayComment(comment) {
 }
 
 function displayEndSession() {
+	document.getElementById('export').style.display = 'none';
 	getActiveSession().then((session) => {
 		loadDetails(session);
 
@@ -47,10 +48,93 @@ function endSession() {
 	//
 }
 
-function exportMarkdown() {
-	//
+// Add the provided charter details onto the session before exporting it
+function addCharterDetailsToSession(session) {
+	// Update existing key values
+	session.datetime_started = document.getElementById('start-date').value;
+	session.datetime_ended = document.getElementById('end-date').value;
+	session.duration = document.getElementById('actual-duration').value;
+	session.estimated_duration = document.getElementById('estimated-duration').value;
+
+	// Add new key values
+	session = {
+		...session,
+		title: document.getElementById('charter').value,
+		environment: document.getElementById('environment').value
+	}
+	if (session.title == '') {
+		session.title = 'NA';
+	}
+
+	return session;
 }
 
+// Downloads the session screenshots, along with given content in the given format
+function downloadExport(session, content, format) {
+	// Create zip and add files
+	const zip = new JSZip();
+	zip.file(`content.${format}`, content);
+	session.comments.forEach((comment, index) => {
+		if (comment.attachment) {
+			const imageBase64 = comment.attachment.replace(/^data:image\/[a-z]+;base64,/, '');
+			const imageFilename = `${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
+			zip.file(`screenshots/${imageFilename}`, imageBase64, {base64: true});
+		}
+	});
+
+	// Generate and save
+	zip.generateAsync({type: 'blob'}).then((blob) => {
+		const zipFilename = `Chater - ${session.datetime_started} - ${session.title}.zip`
+		saveAs(blob, zipFilename);
+	});
+}
+
+function exportMarkdown() {
+	document.getElementById('export').style.display = 'initial';
+	getActiveSession().then((session) => {
+		session = addCharterDetailsToSession(session);
+		let text = `Title: ${session.title}
+
+Description:
+**Pre-Testing Notes:**
+...
+
+**Session:**
+Estimated Duration: *${session.estimated_duration}*
+Actual Duration: *${session.duration}*
+Started: *${session.datetime_started}*
+Ended: *${session.datetime_ended}*
+
+**Environment:**
+${session.environment}
+
+**Test Notes:**
+`;
+
+		session.comments.forEach((comment) => {
+			let textComment = '';
+			if (comment.type == 'bug') {
+				textComment += '*Bug*: ';
+			} else if (comment.type == 'clarification') {
+				textComment += '*Clarification*: ';
+			}
+
+			textComment += `${comment.comment}
+
+`;
+			text += textComment;
+		});
+
+		document.getElementById('export-content').textContent = text;
+
+		// Add event listener for download export
+		document.getElementById('button-export-download').addEventListener('click', () => {
+			downloadExport(session, text, 'md');
+		});
+	});
+}
+
+// Displays the raw active session object for export, along with a download button
 function exportJson() {
 	//
 }

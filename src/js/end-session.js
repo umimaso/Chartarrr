@@ -77,7 +77,7 @@ function downloadExport(session, content, format) {
 	session.comments.forEach((comment, index) => {
 		if (comment.attachment) {
 			const imageBase64 = comment.attachment.replace(/^data:image\/[a-z]+;base64,/, '');
-			const imageFilename = `${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
+			const imageFilename = `Comment ${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
 			zip.file(`screenshots/${imageFilename}`, imageBase64, {base64: true});
 		}
 	});
@@ -136,7 +136,16 @@ ${session.environment}
 
 // Displays the raw active session object for export, along with a download button
 function exportJson() {
-	//
+	document.getElementById('export').style.display = 'initial';
+	getActiveSession().then((session) => {
+		session = addCharterDetailsToSession(session);
+		document.getElementById('export-content').textContent = JSON.stringify(session, null, 4);
+
+		// Add event listener for download export
+		document.getElementById('button-export-download').addEventListener('click', () => {
+			downloadExport(session, JSON.stringify(session), 'json');
+		});
+	});
 }
 
 // Display a warning and another confirmation of ending the active session

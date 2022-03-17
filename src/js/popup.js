@@ -54,7 +54,7 @@ function startSession() {
 	const item = {
 		active_session: {
 			comments: [],
-			datetime_started: new Date(),
+			datetime_started: new Date().toJSON(),
 			datetime_ended: null,
 			duration: 0,
 			estimated_duration: estDuration
@@ -94,7 +94,7 @@ async function addComment(event) {
 	session.comments.push({
 		type: type,
 		comment: comment,
-		date_created: new Date(),
+		datetime_created: new Date().toJSON(),
 		tab: {
 			title: activeTab.title,
 			url: activeTab.url

@@ -59,7 +59,7 @@ function displayEndSession() {
 function loadDetails(session) {
 	document.getElementById('estimated-duration').value = session.estimated_duration + ' minutes';
 	document.getElementById('actual-duration').value = session.duration + ' minutes';
-	document.getElementById('start-date').value = session.datetime_started.toISOString().substring(0, 16);
+	document.getElementById('start-date').value = session.datetime_started.substring(0, 16);
 	document.getElementById('end-date').value = new Date().toISOString().substring(0, 16);
 }
 
@@ -74,14 +74,14 @@ function downloadExport(session) {
 	session.comments.forEach((comment, index) => {
 		if (comment.attachment) {
 			const imageBase64 = comment.attachment.replace(/^data:image\/[a-z]+;base64,/, '');
-			const imageFilename = `Comment ${index + 1} - ${comment.date_created.toISOString().substring(0, 16)}.png`;
+			const imageFilename = `Comment ${index + 1} - ${comment.datetime_created.substring(0, 16)}.png`;
 			zip.file(`screenshots/${imageFilename}`, imageBase64, {base64: true});
 		}
 	});
 
 	// Generate and save
 	zip.generateAsync({type: 'blob'}).then((blob) => {
-		const zipFilename = `Chater - ${session.datetime_started} - ${session.title}.zip`
+		const zipFilename = `Charter - ${session.datetime_started} - ${session.title}.zip`
 		saveAs(blob, zipFilename);
 	});
 }

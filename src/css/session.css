@@ -13,7 +13,10 @@ fieldset fieldset {
 
 textarea {
 	margin-bottom: 1rem;
+	box-sizing: border-box;
+	overflow-x: hidden;
 	resize: none;
+	width: 60%;
 }
 
 button {

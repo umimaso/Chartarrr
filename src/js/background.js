@@ -21,6 +21,8 @@ async function alarmAlive() {
 		// Start tracking the session again if the alarm isn't found
 		if (!alarm) {
 			trackSession(session);
+		} else {
+			updateBadge(session);
 		}
 	}
 }

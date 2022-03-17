@@ -61,6 +61,7 @@ function createCommentElement(comment, index) {
 	// Set attributes for elements
 	div.setAttribute('class', 'container');
 	div.setAttribute('id', 'comment');
+	commentText.setAttribute('rows', '3');
 	actions.setAttribute('role', 'group');
 	actions.setAttribute('aria-label', 'Comment actions');
 	actionsUpdateComment.style.background = 'lightsalmon';
@@ -73,7 +74,7 @@ function createCommentElement(comment, index) {
 	legendTab.innerText = 'Tab';
 	tabTitle.innerText = `Title: ${comment.tab.title}`;
 	tabUrl.innerText = `Url: ${comment.tab.url}`;
-	dateCreated.innerText = `Date: ${comment.date_created.toLocaleString()}`;
+	dateCreated.innerText = `Date: ${new Date(comment.datetime_created).toLocaleString()}`;
 	actionsUpdateComment.innerText = 'Update Comment';
 	actionsDeleteComment.innerText = 'Delete Comment';
 	actionsPreviewAttachment.innerText = 'Preview Attachment';

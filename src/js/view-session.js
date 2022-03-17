@@ -5,7 +5,7 @@ async function displaySession() {
 		// Hide no active session warning
 		document.getElementById('no-session').style.display = 'none';
 
-		document.getElementById('start-date').textContent = session.datetime_started.toLocaleString();
+		document.getElementById('start-date').textContent = new Date(session.datetime_started).toLocaleString();
 		document.getElementById('estimated-duration').textContent = session.estimated_duration;
 		document.getElementById('duration').textContent = session.duration;
 		document.getElementById('comment-count').textContent = session.comments.length;

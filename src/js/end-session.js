@@ -154,7 +154,7 @@ async function endSession() {
 		// Clear storage -> alarm -> badge text, and close this page
 		await browser.storage.local.remove('active_session');
 		await browser.alarms.clearAll();
-		browser.browserAction.setBadgeText({text: ''});
+		action.setBadgeText({text: ''});
 		getActiveTab().then((tab) => {
 			browser.tabs.remove(tab.id);
 		});

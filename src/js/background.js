@@ -1,14 +1,15 @@
-async function checkAlarm(alarm) {
-	switch (alarm.name) {
-		case 'session':
-			// Update the running duration for the active session
-			const session = await getActiveSession();
-			session.duration = session.duration + 1;
-			browser.storage.local.set({ active_session: session });
-			updateBadge(session);
-			break;
-	}
+// If we're on a Chromium browser, import scripts to service worker
+if (typeof browser != 'object') {
+	importScripts('browser-polyfill.min.js', 'helpers.js');
 }
+
+browser.alarms.onAlarm.addListener(async () => {
+	// Update the running duration for the active session
+	const session = await getActiveSession();
+	session.duration = session.duration + 1;
+	browser.storage.local.set({ active_session: session });
+	updateBadge(session);
+});
 
 // Restarts the background alarm if it should be running
 // This is due to the alarm ending when the browser session is restarted
@@ -27,5 +28,4 @@ async function alarmAlive() {
 	}
 }
 
-browser.alarms.onAlarm.addListener(checkAlarm);
 alarmAlive();

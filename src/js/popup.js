@@ -70,11 +70,6 @@ function startSession() {
 	displayPopup()
 }
 
-// Unused at the moment, not sure if I'll implement this functionality yet
-function pauseSession() {
-	browser.browserAction.setBadgeBackgroundColor({color: 'orange'});
-}
-
 async function addComment(event) {
 	const commentElement = document.getElementById('comment');
 

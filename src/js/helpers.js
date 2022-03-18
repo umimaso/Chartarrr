@@ -1,3 +1,5 @@
+const action = browser.action || browser.browserAction;
+
 function getActiveSession() {
 	// Return the active session from local storage
 	return browser.storage.local.get('active_session').then((results) => {
@@ -24,15 +26,15 @@ function updateBadge(session) {
 
 	// Only update badge if non negative value
 	if (remaining >= 0) {
-		browser.browserAction.setBadgeText({text: remaining.toString()});
+		action.setBadgeText({text: remaining.toString()});
 	} else {
-		browser.browserAction.setBadgeText({text: '0'});
+		action.setBadgeText({text: '0'});
 	}
 
 	if (remaining <= 0) {
-		browser.browserAction.setBadgeBackgroundColor({color: 'red'});
+		action.setBadgeBackgroundColor({color: 'red'});
 	} else {
-		browser.browserAction.setBadgeBackgroundColor({color: 'green'});
+		action.setBadgeBackgroundColor({color: 'green'});
 	}
 }
 

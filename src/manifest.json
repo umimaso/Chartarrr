@@ -1,20 +1,12 @@
 {
 	"manifest_version": 2,
 	"name": "Chartarrr!",
-	"description": "Assisting in exploratory testing on the web.",
-	"version": "0.0.1",
+	"description": "Assisting in exploratory testing on the web via session based test charters.",
+	"version": "1.0.0",
 	"icons": {
 		"48": "icons/icon.png",
 		"96": "icons/icon@2x.png"
 	},
-
-	"permissions": [
-		"<all_urls>",
-		"activeTab",
-		"alarms",
-		"storage",
-		"tabs"
-	],
 
 	"background": {
 		"scripts": [
@@ -32,5 +24,18 @@
 		},
 		"default_popup": "popup.html",
 		"default_title": "Chartarrr!"
-	}
+	},
+
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "chartarrr@umimaso.com"
+		}
+	},
+
+	"permissions": [
+		"<all_urls>",
+		"activeTab",
+		"alarms",
+		"storage"
+	]
 }

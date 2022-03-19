@@ -36,5 +36,14 @@ Features:
   <img width="400" src="assets/screenshots/3-end-actions.png">
 </p>
 
+## Third Party Library Usage
+Thanks to the maintainers, and contributors of the following libraries:
+- [Font-Awesome 6.0.0](https://github.com/FortAwesome/Font-Awesome/tree/6.0.0)
+- [normalize.css 8.0.1](https://github.com/necolas/normalize.css/tree/8.0.1)
+- [yorha](https://github.com/metakirby5/yorha)
+- [webextension-polyfill 0.8.0](https://unpkg.com/browse/webextension-polyfill@0.8.0/)
+- [FileSaver.js v2.0.4](https://github.com/eligrey/FileSaver.js/tree/v2.0.4)
+- [jszip v3.7.1](https://github.com/Stuk/jszip/tree/v3.7.1)
+
 ## License
 [GPLv3](https://github.com/umimaso/Chartarrr/blob/main/LICENSE.txt)

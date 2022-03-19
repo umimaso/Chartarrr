@@ -57,8 +57,8 @@ function displayEndSession() {
 }
 
 function loadDetails(session) {
-	document.getElementById('estimated-duration').value = session.estimated_duration + ' minutes';
-	document.getElementById('actual-duration').value = session.duration + ' minutes';
+	document.getElementById('estimated-duration').value = session.estimated_duration;
+	document.getElementById('actual-duration').value = session.duration;
 	document.getElementById('start-date').value = session.datetime_started.substring(0, 16);
 	document.getElementById('end-date').value = new Date().toISOString().substring(0, 16);
 }
@@ -91,8 +91,8 @@ function addCharterDetailsToSession(session) {
 	// Update existing key values
 	session.datetime_started = document.getElementById('start-date').value;
 	session.datetime_ended = document.getElementById('end-date').value;
-	session.duration = document.getElementById('actual-duration').value;
-	session.estimated_duration = document.getElementById('estimated-duration').value;
+	session.duration = Number(document.getElementById('actual-duration').value);
+	session.estimated_duration = Number(document.getElementById('estimated-duration').value);
 
 	// Add new key values
 	session = {
@@ -115,8 +115,8 @@ Description:
 ...
 
 **Session:**
-Estimated Duration: *${session.estimated_duration}*
-Actual Duration: *${session.duration}*
+Estimated Duration: *${session.estimated_duration} minutes*
+Actual Duration: *${session.duration} minutes*
 Started: *${session.datetime_started}*
 Ended: *${session.datetime_ended}*
 

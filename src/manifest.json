@@ -10,7 +10,7 @@
 
 	"background": {
 		"scripts": [
-			"js/browser-polyfill.min.js",
+			"js/browser-polyfill.js",
 			"js/helpers.js",
 			"js/background.js"
 		]

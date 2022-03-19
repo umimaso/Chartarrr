@@ -1,6 +1,6 @@
 // If we're on a Chromium browser, import scripts to service worker
 if (typeof browser != 'object') {
-	importScripts('browser-polyfill.min.js', 'helpers.js');
+	importScripts('browser-polyfill.js', 'helpers.js');
 }
 
 browser.alarms.onAlarm.addListener(async () => {

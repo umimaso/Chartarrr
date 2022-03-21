@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 NAME=chartarrr
 BUILD=build
@@ -12,7 +12,7 @@ cp -r src/. $BUILD_FIREFOX
 cp LICENSE.txt $BUILD_FIREFOX
 rm -f $BUILD_FIREFOX/manifest-chromium.json
 VERSION=$(cat $BUILD_FIREFOX/manifest.json | jq -r '.version')
-(cd $BUILD_FIREFOX && zip -q -r -FS ../${NAME}_"${VERSION}".firefox.xpi ./)
+(cd $BUILD_FIREFOX && zip -q -r -FS ../${NAME}-"${VERSION}"-firefox.xpi ./)
 
 # Chromium build
 BUILD_CHROMIUM=$BUILD/chromium
@@ -22,4 +22,4 @@ cp -r src/. $BUILD_CHROMIUM
 cp LICENSE.txt $BUILD_CHROMIUM
 mv -f $BUILD_CHROMIUM/manifest-chromium.json $BUILD_CHROMIUM/manifest.json
 VERSION=$(cat $BUILD_CHROMIUM/manifest.json | jq -r '.version')
-(cd $BUILD_CHROMIUM && zip -q -r -FS ../${NAME}_"${VERSION}".chromium.zip ./)
+(cd $BUILD_CHROMIUM && zip -q -r -FS ../${NAME}-"${VERSION}"-chromium.zip ./)

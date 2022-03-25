@@ -29,6 +29,20 @@ Features:
 - Once finished export it to Markdown, and JSON with all the images taken. Easing the process of logging the session to a external project management tool.
 - Provide optional additional information about your charter during the end session flow. This will further populate the export with more useful details of your completed session.
 
+## Installation
+### Firefox
+[Install from Moazilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/chartarrr/)
+
+### Chromium (Chrome/Edge/Opera/Brave)
+[Install from Chrome Web Store](https://chrome.google.com/webstore/detail/chartarrr/apiicneccfgpgnmpbnlggodkjmhocndj)
+
+If you can't install from the Chrome Web Store for your Chromium browser of choice, you can manually install the extension with the packaged zip under releases. Installing the extension this way will not provide you with future updates automatically as if you'd installed it from the CWS.
+- Download the released [chartarrr-x.x.x-chromium.zip](https://github.com/umimaso/Chartarrr/releases/)
+- Unzip the download
+- Go to your browsers Extensions page
+- Toggle Developer mode on
+- Select Load unpacked and select the unzipped release folder
+
 ## Screenshots
 <p>
   <img width="400" src="assets/screenshots/1-popup.png">
